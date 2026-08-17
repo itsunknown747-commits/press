@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presszila — We'll Be Right Back</title>
+<meta name="description" content="Presszila Public Relations. Your Story. Our Platform. The new site is on its way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-black:#03050c;
+    --bg-navy:#060c22;
+    --glow-1:#3b6bff;
+    --glow-2:#0d1c66;
+    --white:#f4f7ff;
+    --muted:#8ea0c9;
+    --divider:rgba(105,140,255,0.45);
+    --ring:rgba(110,150,255,0.55);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html,body{
+    height:100%;
+    background:var(--bg-black);
+    overflow:hidden;
+  }
+
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Ambient background ---------- */
+  .bg{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 42%, rgba(59,107,255,0.35), transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(13,28,102,0.55), transparent 70%),
+      linear-gradient(180deg, var(--bg-black) 0%, var(--bg-navy) 55%, var(--bg-black) 100%);
+    z-index:0;
+  }
+
+  .glow-pulse{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:900px;
+    height:900px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(63,110,255,0.28) 0%, rgba(63,110,255,0.08) 35%, transparent 65%);
+    filter:blur(10px);
+    animation:pulse 6s ease-in-out infinite;
+    z-index:0;
+  }
+
+  @keyframes pulse{
+    0%,100%{ opacity:0.75; transform:translate(-50%,-50%) scale(1); }
+    50%{ opacity:1; transform:translate(-50%,-50%) scale(1.08); }
+  }
+
+  /* ---------- Floating signal particles ---------- */
+  .particles{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+  }
+
+  .particle{
+    position:absolute;
+    bottom:-10px;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:var(--glow-1);
+    box-shadow:0 0 6px 1px rgba(80,130,255,0.9);
+    opacity:0;
+    animation-name:rise;
+    animation-timing-function:ease-in;
+    animation-iteration-count:infinite;
+  }
+
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:0.9; }
+    90%{ opacity:0.4; }
+    100%{ transform:translateY(-110vh) translateX(var(--drift,20px)); opacity:0; }
+  }
+
+  /* ---------- 3D broadcast-ring signature ---------- */
+  .orbit-scene{
+    position:relative;
+    width:340px;
+    height:340px;
+    margin:0 auto 6px;
+    perspective:900px;
+    z-index:2;
+  }
+
+  .orbit-core{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:14px;
+    height:14px;
+    margin:-7px 0 0 -7px;
+    border-radius:50%;
+    background:var(--white);
+    box-shadow:
+      0 0 20px 6px rgba(120,160,255,0.9),
+      0 0 60px 20px rgba(63,110,255,0.5);
+    animation:core-beat 2.4s ease-in-out infinite;
+  }
+
+  @keyframes core-beat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.35); }
+  }
+
+  .ring{
+    position:absolute;
+    top:50%;
+    left:50%;
+    border-radius:50%;
+    border:1.5px solid var(--ring);
+    box-shadow:0 0 18px rgba(80,130,255,0.35) inset, 0 0 18px rgba(80,130,255,0.25);
+    transform-style:preserve-3d;
+  }
+
+  .ring--1{
+    width:160px; height:160px; margin:-80px 0 0 -80px;
+    transform:rotateX(72deg) rotateZ(0deg);
+    animation:spin-1 7s linear infinite;
+    opacity:0.9;
+  }
+  .ring--2{
+    width:240px; height:240px; margin:-120px 0 0 -120px;
+    transform:rotateX(72deg) rotateY(20deg) rotateZ(0deg);
+    animation:spin-2 11s linear infinite reverse;
+    opacity:0.6;
+  }
+  .ring--3{
+    width:320px; height:320px; margin:-160px 0 0 -160px;
+    transform:rotateX(72deg) rotateY(-15deg) rotateZ(0deg);
+    animation:spin-3 16s linear infinite;
+    opacity:0.35;
+  }
+
+  @keyframes spin-1{ from{ transform:rotateX(72deg) rotateZ(0deg); } to{ transform:rotateX(72deg) rotateZ(360deg); } }
+  @keyframes spin-2{ from{ transform:rotateX(72deg) rotateY(20deg) rotateZ(0deg); } to{ transform:rotateX(72deg) rotateY(20deg) rotateZ(360deg); } }
+  @keyframes spin-3{ from{ transform:rotateX(72deg) rotateY(-15deg) rotateZ(0deg); } to{ transform:rotateX(72deg) rotateY(-15deg) rotateZ(360deg); } }
+
+  /* ---------- Content ---------- */
+  .content{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    padding:0 24px;
+    margin-top:-220px;
+  }
+
+  h1{
+    font-family:'Sora',sans-serif;
+    font-weight:800;
+    font-size:clamp(2.6rem, 8vw, 5rem);
+    letter-spacing:-0.02em;
+    line-height:1;
+    background:linear-gradient(180deg, #ffffff 0%, #c9d6ff 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 40px rgba(90,130,255,0.35);
+  }
+
+  .subtitle{
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:clamp(1rem, 2.4vw, 1.35rem);
+    color:var(--muted);
+    letter-spacing:0.02em;
+    margin-top:6px;
+  }
+
+  .divider{
+    width:64px;
+    height:2px;
+    margin:22px auto;
+    background:linear-gradient(90deg, transparent, var(--divider), transparent);
+  }
+
+  .tagline{
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    font-size:clamp(0.95rem, 2vw, 1.1rem);
+    color:#c3cdea;
+    letter-spacing:0.01em;
+  }
+
+  .status{
+    margin-top:38px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 20px;
+    border-radius:999px;
+    border:1px solid rgba(110,150,255,0.35);
+    background:rgba(20,32,72,0.4);
+    backdrop-filter:blur(6px);
+  }
+
+  .status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#5b8dff;
+    box-shadow:0 0 10px 3px rgba(91,141,255,0.8);
+    animation:core-beat 2.4s ease-in-out infinite;
+  }
+
+  .status-text{
+    font-family:'Inter',sans-serif;
+    font-size:0.85rem;
+    font-weight:500;
+    color:#dbe3ff;
+    letter-spacing:0.03em;
+  }
+
+  .footnote{
+    margin-top:22px;
+    font-size:0.78rem;
+    color:#5c6a94;
+    letter-spacing:0.02em;
+  }
+
+  @media (max-width:520px){
+    .orbit-scene{ width:260px; height:260px; }
+    .ring--1{ width:120px; height:120px; margin:-60px 0 0 -60px; }
+    .ring--2{ width:190px; height:190px; margin:-95px 0 0 -95px; }
+    .ring--3{ width:250px; height:250px; margin:-125px 0 0 -125px; }
+    .content{ margin-top:-170px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ring, .glow-pulse, .orbit-core, .status-dot, .particle{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="glow-pulse"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="content">
+    <div class="orbit-scene">
+      <div class="ring ring--3"></div>
+      <div class="ring ring--2"></div>
+      <div class="ring ring--1"></div>
+      <div class="orbit-core"></div>
+    </div>
+
+    <h1>Presszila</h1>
+    <div class="subtitle">Public Relations</div>
+    <div class="divider"></div>
+    <p class="tagline">Your Story. Our Platform.</p>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      <span class="status-text">WE'LL BE RIGHT BACK</span>
+    </div>
+
+    <p class="footnote">Our new home is being built. Thanks for your patience.</p>
+  </div>
+
+  <script>
+    // Generate ambient rising particles
+    const field = document.getElementById('particles');
+    const COUNT = 26;
+    for (let i = 0; i < COUNT; i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const left = Math.random() * 100;
+      const duration = 9 + Math.random() * 10;
+      const delay = Math.random() * 12;
+      const drift = (Math.random() * 80 - 40) + 'px';
+      p.style.left = left + 'vw';
+      p.style.setProperty('--drift', drift);
+      p.style.animationDuration = duration + 's';
+      p.style.animationDelay = delay + 's';
+      field.appendChild(p);
+    }
+  </script>
+
+</body>
+</html>
